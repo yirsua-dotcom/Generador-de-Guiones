@@ -1,0 +1,24 @@
+{
+  "name": "El Espejo Bíblico — Generador de Guiones",
+  "short_name": "Generador Guiones",
+  "description": "Genera guiones optimizados para retención en YouTube faceless.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#1B2A4A",
+  "theme_color": "#1B2A4A",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

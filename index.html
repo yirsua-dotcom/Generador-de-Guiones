@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>El Espejo Bíblico — Generador de Guiones</title>
+  <meta name="description" content="Genera guiones optimizados para retención en canales faceless de YouTube." />
+  <meta name="theme-color" content="#1B2A4A" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Generador Guiones" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    :root {
+      /* Paleta de marca — reemplaza por los colores oficiales cuando los tengas */
+      --azul-noche: #1B2A4A;
+      --azul-noche-2: #111d38;
+      --dorado: #C9A227;
+      --dorado-claro: #e4c65f;
+      --pergamino: #F5EFE0;
+      --pergamino-2: #fbf7ec;
+      --texto-claro: #20242C;
+      --texto-suave: #5a5347;
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: #e9e6df;
+      background:
+        radial-gradient(1200px 600px at 15% -10%, rgba(201, 162, 39, .14), transparent 60%),
+        radial-gradient(1000px 700px at 100% 0%, rgba(201, 162, 39, .08), transparent 55%),
+        linear-gradient(160deg, var(--azul-noche) 0%, var(--azul-noche-2) 100%);
+      min-height: 100vh;
+    }
+
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 38px 22px 70px
+    }
+
+    header.brand {
+      text-align: center;
+      margin-bottom: 30px
+    }
+
+    .brand .eyebrow {
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: var(--dorado-claro);
+      font-weight: 600;
+      margin-bottom: 10px
+    }
+
+    .brand h1 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: clamp(30px, 5vw, 50px);
+      margin: 0;
+      line-height: 1.05;
+      color: #fdfbf4;
+    }
+
+    .brand h1 span {
+      color: var(--dorado)
+    }
+
+    .brand p.sub {
+      margin: 12px auto 0;
+      max-width: 600px;
+      color: #c7cbd6;
+      font-size: 15px;
+      line-height: 1.6
+    }
+
+    .rule {
+      width: 70px;
+      height: 2px;
+      background: var(--dorado);
+      margin: 18px auto 0;
+      border-radius: 2px;
+      opacity: .9
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 420px) minmax(0, 1fr);
+      gap: 26px;
+      align-items: start
+    }
+
+    @media (max-width:900px) {
+      .grid {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .card {
+      background: rgba(255, 255, 255, .045);
+      border: 1px solid rgba(201, 162, 39, .28);
+      border-radius: 18px;
+      padding: 24px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 18px 40px -24px rgba(0, 0, 0, .6);
+    }
+
+    .card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 19px;
+      margin: 0 0 18px;
+      color: #fdfbf4;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 9px
+    }
+
+    .card h2 .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--dorado)
+    }
+
+    .field {
+      margin-bottom: 20px
+    }
+
+    .field:last-child {
+      margin-bottom: 0
+    }
+
+    label.lbl {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #e4c65f;
+      margin-bottom: 8px;
+      letter-spacing: .02em
+    }
+
+    .hint {
+      font-size: 12px;
+      color: #a9afbd;
+      margin-top: 6px;
+      line-height: 1.45
+    }
+
+    input[type=text],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 11px;
+      border: 1px solid rgba(201, 162, 39, .35);
+      background: rgba(10, 18, 36, .55);
+      color: #f4f1e8;
+      font-size: 15px;
+      font-family: inherit;
+      transition: border-color .15s, box-shadow .15s;
+    }
+
+    input[type=text]::placeholder {
+      color: #8b93a4
+    }
+
+    input[type=text]:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--dorado);
+      box-shadow: 0 0 0 3px rgba(201, 162, 39, .18)
+    }
+
+    select {
+      appearance: none;
+      cursor: pointer;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23C9A227' stroke-width='2.5'><path d='M6 9l6 6 6-6'/></svg>");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 38px
+    }
+
+    .row {
+      display: flex;
+      gap: 12px;
+      align-items: center
+    }
+
+    input[type=number] {
+      width: 96px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(201, 162, 39, .35);
+      background: rgba(10, 18, 36, .55);
+      color: #f4f1e8;
+      font-size: 15px;
+      font-family: inherit;
+      text-align: center
+    }
+
+    input[type=number]:focus {
+      outline: none;
+      border-color: var(--dorado)
+    }
+
+    input[type=range] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 6px;
+      border-radius: 6px;
+      background: linear-gradient(90deg, var(--dorado) var(--fill, 50%), rgba(255, 255, 255, .15) var(--fill, 50%));
+      outline: none;
+      cursor: pointer
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--pergamino);
+      border: 3px solid var(--dorado);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, .4);
+      cursor: pointer
+    }
+
+    input[type=range]::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--pergamino);
+      border: 3px solid var(--dorado);
+      cursor: pointer
+    }
+
+    .enfoque-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11.5px;
+      color: #c7cbd6;
+      margin-top: 9px;
+      font-weight: 500
+    }
+
+    .enfoque-val {
+      text-align: center;
+      font-size: 13px;
+      color: var(--dorado-claro);
+      font-weight: 600;
+      margin-top: 8px
+    }
+
+    .apikey-box {
+      border-top: 1px solid rgba(201, 162, 39, .2);
+      margin-top: 4px;
+      padding-top: 20px
+    }
+
+    .check {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-top: 10px;
+      font-size: 12.5px;
+      color: #c7cbd6;
+      cursor: pointer;
+      user-select: none
+    }
+
+    .check input {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--dorado);
+      cursor: pointer
+    }
+
+    .btn {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: .02em;
+      background: linear-gradient(180deg, var(--dorado-claro), var(--dorado));
+      color: #2a2205;
+      transition: transform .08s, box-shadow .15s, filter .15s;
+      box-shadow: 0 10px 26px -12px rgba(201, 162, 39, .7);
+      margin-top: 6px
+    }
+
+    .btn:hover:not(:disabled) {
+      filter: brightness(1.05);
+      box-shadow: 0 14px 32px -12px rgba(201, 162, 39, .85)
+    }
+
+    .btn:active:not(:disabled) {
+      transform: translateY(1px)
+    }
+
+    .btn:disabled {
+      opacity: .55;
+      cursor: not-allowed;
+      filter: grayscale(.3)
+    }
+
+    /* Panel de resultado */
+    .result-card {
+      background: var(--pergamino);
+      border-radius: 18px;
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 22px 50px -26px rgba(0, 0, 0, .7);
+      overflow: hidden;
+      border: 1px solid rgba(201, 162, 39, .4)
+    }
+
+    .result-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px 22px;
+      border-bottom: 1px solid rgba(32, 36, 44, .12);
+      background: linear-gradient(180deg, #fbf7ec, #f2ead8)
+    }
+
+    .result-head .title {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      color: var(--azul-noche);
+      font-weight: 700
+    }
+
+    .result-head .actions {
+      display: flex;
+      gap: 8px
+    }
+
+    .mini {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 13px;
+      border-radius: 9px;
+      cursor: pointer;
+      border: 1px solid rgba(27, 42, 74, .25);
+      background: #fff;
+      color: var(--azul-noche);
+      transition: background .12s, transform .08s
+    }
+
+    .mini:hover:not(:disabled) {
+      background: #fff7e2;
+      border-color: var(--dorado)
+    }
+
+    .mini:active:not(:disabled) {
+      transform: translateY(1px)
+    }
+
+    .mini:disabled {
+      opacity: .4;
+      cursor: not-allowed
+    }
+
+    .mini svg {
+      width: 15px;
+      height: 15px
+    }
+
+    .script {
+      padding: 34px 40px 40px;
+      overflow-y: auto;
+      flex: 1;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 21px;
+      line-height: 1.85;
+      color: var(--texto-claro);
+      white-space: pre-wrap;
+      word-break: break-word;
+      max-width: 70ch
+    }
+
+    .script.placeholder,
+    .script.center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--texto-suave);
+      max-width: none;
+      font-size: 17px;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6
+    }
+
+    .ph-icon {
+      font-size: 46px;
+      margin-bottom: 14px;
+      opacity: .6
+    }
+
+    .counter {
+      font-size: 12px;
+      color: var(--texto-suave);
+      padding: 10px 22px;
+      border-top: 1px solid rgba(32, 36, 44, .1);
+      background: #f2ead8;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      justify-content: space-between;
+      align-items: center
+    }
+
+    .spinner {
+      width: 34px;
+      height: 34px;
+      border: 3px solid rgba(27, 42, 74, .15);
+      border-top-color: var(--dorado);
+      border-radius: 50%;
+      animation: spin .8s linear infinite;
+      margin-bottom: 16px
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    .err {
+      color: #8a2c1f
+    }
+
+    .err .retry {
+      margin-top: 16px
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 26px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--azul-noche);
+      color: #fdfbf4;
+      padding: 12px 22px;
+      border-radius: 11px;
+      border: 1px solid var(--dorado);
+      font-size: 14px;
+      font-weight: 500;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s, transform .25s;
+      box-shadow: 0 12px 30px -12px rgba(0, 0, 0, .6);
+      z-index: 50
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0)
+    }
+
+    footer.foot {
+      text-align: center;
+      margin-top: 34px;
+      color: #8b93a4;
+      font-size: 12px;
+      line-height: 1.6
+    }
+
+    footer.foot code {
+      color: var(--dorado-claro);
+      background: rgba(201, 162, 39, .1);
+      padding: 2px 6px;
+      border-radius: 5px
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useRef, useEffect, useMemo } = React;
+
+    const NICHOS = [
+      "Psicología bíblica", "Torá", "Historias bíblicas", "Comportamiento humano",
+      "Fe judía", "Curiosidades históricas", "Mente humana", "Judaísmo",
+      "Emunáh", "Sabiduría ancestral"
+    ];
+    const TONOS = ["Cercano", "Inspirador", "Misterioso", "Reflexivo"];
+    const MODELO = "claude-sonnet-4-6";
+
+    // ---------- Construcción del prompt maestro ----------
+    function construirPrompt({ tema, nicho, palabras, enfoque, tono }) {
+      const story = enfoque;          // 0..100  → 100 = 100% storytelling
+      const info = 100 - enfoque;     // 100 = 100% informativo
+      const min = Math.round(palabras * 0.95);
+      const max = Math.round(palabras * 1.05);
+
+      let ajuste;
+      if (info >= 70) {
+        ajuste = "Este guion se inclina a lo INFORMATIVO: prioriza densidad de datos, estructura clara y claridad didáctica, manteniendo siempre los hooks y la curiosidad.";
+      } else if (story >= 70) {
+        ajuste = "Este guion se inclina al STORYTELLING: prioriza narrativa, emoción y escena, integrando la información dentro de la historia.";
+      } else {
+        ajuste = "Este guion mezcla ambos enfoques de forma equilibrada: teje los datos dentro de una narrativa con ritmo, alternando explicación y escena.";
+      }
+
+      return `Eres un guionista experto en retención para YouTube faceless, especializado en contenido de ${nicho}. Escribe un guion para un video sobre: "${tema}".
+
+Longitud objetivo: ${palabras} palabras (respétala con precisión; el rango aceptable es ${min}–${max} palabras). Enfoque: ${info}% informativo / ${story}% storytelling. Tono: ${tono}.
+
+El guion debe estar optimizado para retención máxima de principio a fin. Aplica de forma orgánica, sin nombrarlas nunca en el texto:
+
+- Hook (0–5 s): abre con una pregunta provocadora, una afirmación contraintuitiva o una promesa de valor imposible de ignorar. Planta de inmediato un bucle abierto (una pregunta o promesa que solo se resolverá al final).
+- Stakes: en las primeras frases deja claro por qué esto le importa al espectador ahora.
+- Bucles abiertos y curiosidad: siembra preguntas a lo largo del guion que se responden más tarde; mantén siempre "algo pendiente".
+- Re-hooks cada 20–40 segundos: micro-cliffhangers y giros de ritmo ("pero lo más impactante viene ahora…", "y aquí está lo que casi nadie nota…") para reiniciar la atención.
+- Pattern interrupts: alterna frases cortas y largas, preguntas retóricas dirigidas al espectador, cambios de tono, micro-historias.
+- Storytelling: cuando aplique, usa arco narrativo (situación → tensión/conflicto → giro → resolución → lección). Para nichos bíblicos/judaicos, usa detalles sensoriales y concretos (nombres, lugares, imágenes vívidas) que hagan la historia palpable y creíble.
+- Especificidad: datos concretos, imágenes precisas y ejemplos tangibles; evita generalidades vacías y relleno.
+- Voz humana y natural: conversacional, con contracciones y ritmo real de habla. Que no suene a IA ni a lista. Nada de clichés de relleno, ni frases robóticas, ni "en este video vamos a hablar de".
+- CTA integrado: inserta la llamada a la acción de forma orgánica cerca del punto de mayor valor emocional, no forzada al inicio.
+- Cierre: resuelve el bucle abierto principal con una recompensa satisfactoria y termina con una reflexión que invite a comentar.
+
+Ajuste de enfoque: ${ajuste}
+
+Devuelve SOLO el texto del guion, listo para narrar. Sin preámbulos ni explicaciones tuyas. Sin títulos de sección, sin etiquetas tipo "HOOK:", sin corchetes, sin notas de producción, sin markdown, sin comentarios meta. Únicamente el texto corrido que se narra.`;
+    }
+
+    // Limpieza defensiva por si el modelo cuela markdown o encabezados
+    function limpiarGuion(txt) {
+      let t = txt.replace(/\r/g, "");
+      t = t.replace(/```[a-z]*\n?/gi, "").replace(/```/g, "");
+      t = t.replace(/^\s{0,3}#{1,6}\s+/gm, "");            // encabezados markdown
+      t = t.replace(/\*\*(.+?)\*\*/g, "$1").replace(/\*(.+?)\*/g, "$1"); // negritas/itálicas
+      t = t.replace(/^\s*[-•*]\s+/gm, "");                 // viñetas sueltas
+      t = t.replace(/^\s*(HOOK|GANCHO|CTA|CIERRE|INTRO|OUTRO|NARRADOR|VOZ EN OFF)\s*:\s*/gim, "");
+      t = t.replace(/\n{3,}/g, "\n\n");
+      return t.trim();
+    }
+
+    function contarPalabras(t) {
+      const s = t.trim();
+      return s ? s.split(/\s+/).length : 0;
+    }
+
+    function App() {
+      const [tema, setTema] = useState("");
+      const [nicho, setNicho] = useState(NICHOS[0]);
+      const [palabras, setPalabras] = useState(1200);
+      const [enfoque, setEnfoque] = useState(50);
+      const [tono, setTono] = useState(TONOS[0]);
+
+      const [apiKey, setApiKey] = useState(() => localStorage.getItem("anthropic_api_key") || "");
+      const [recordar, setRecordar] = useState(() => !!localStorage.getItem("anthropic_api_key"));
+
+      const [guion, setGuion] = useState("");
+      const [cargando, setCargando] = useState(false);
+      const [error, setError] = useState("");
+      const [toast, setToast] = useState("");
+      const abortRef = useRef(null);
+      const scrollRef = useRef(null);
+
+      useEffect(() => {
+        if (recordar && apiKey) localStorage.setItem("anthropic_api_key", apiKey);
+        if (!recordar) localStorage.removeItem("anthropic_api_key");
+      }, [apiKey, recordar]);
+
+      // autoscroll mientras llega el streaming
+      useEffect(() => {
+        if (cargando && scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+      }, [guion, cargando]);
+
+      const mostrarToast = (msg) => { setToast(msg); setTimeout(() => setToast(""), 2000); };
+
+      const info = 100 - enfoque;
+      const enfoqueTxt = enfoque <= 8 ? "100% Informativo"
+        : enfoque >= 92 ? "100% Storytelling"
+          : `${info}% Informativo · ${enfoque}% Storytelling`;
+
+      const puedeGenerar = tema.trim() && apiKey.trim() && !cargando;
+
+      async function generar() {
+        if (!puedeGenerar) return;
+        setError(""); setGuion(""); setCargando(true);
+
+        const prompt = construirPrompt({ tema: tema.trim(), nicho, palabras, enfoque, tono });
+        // margen de tokens holgado para respetar el conteo (español ~2 tokens/palabra)
+        const maxTokens = Math.min(Math.ceil(palabras * 2.4) + 900, 20000);
+
+        const controller = new AbortController();
+        abortRef.current = controller;
+
+        try {
+          const resp = await fetch("https://api.anthropic.com/v1/messages", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              "x-api-key": apiKey.trim(),
+              "anthropic-version": "2023-06-01",
+              "anthropic-dangerous-direct-browser-access": "true"
+            },
+            signal: controller.signal,
+            body: JSON.stringify({
+              model: MODELO,
+              max_tokens: maxTokens,
+              stream: true,
+              messages: [{ role: "user", content: prompt }]
+            })
+          });
+
+    if (!resp.ok) {
+      let msg = `Error ${resp.status}`;
+      try { const j = await resp.json(); if (j?.error?.message) msg = j.error.message; } catch (e) { }
+      if (resp.status === 401) msg = "API key inválida o ausente. Revisa tu clave de Anthropic.";
+      if (resp.status === 429) msg = "Límite de solicitudes alcanzado. Espera unos segundos y reintenta.";
+      throw new Error(msg);
+    }
+
+    // ---- Lectura del stream SSE ----
+    const reader = resp.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = "";
+    let acumulado = "";
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true });
+      const partes = buffer.split("\n\n");
+      buffer = partes.pop();
+      for (const bloque of partes) {
+        const linea = bloque.split("\n").find(l => l.startsWith("data:"));
+        if (!linea) continue;
+        const payload = linea.slice(5).trim();
+        if (!payload || payload === "[DONE]") continue;
+        let ev;
+        try { ev = JSON.parse(payload); } catch (e) { continue; }
+        if (ev.type === "content_block_delta" && ev.delta?.type === "text_delta") {
+          acumulado += ev.delta.text;
+          setGuion(acumulado);
+        } else if (ev.type === "error") {
+          throw new Error(ev.error?.message || "Error durante la generación.");
+        }
+      }
+    }
+
+    const limpio = limpiarGuion(acumulado);
+    setGuion(limpio);
+    if (!limpio) throw new Error("No se recibió texto. Reintenta.");
+    } catch (err) {
+      if (err.name === "AbortError") { /* cancelado por el usuario */ }
+      else {
+        let m = err.message || "Fallo inesperado.";
+        if (m.includes("Failed to fetch")) m = "No se pudo conectar con la API de Claude. Revisa tu conexión a internet.";
+        setError(m);
+        setGuion("");
+      }
+    } finally {
+      setCargando(false);
+      abortRef.current = null;
+    }
+  }
+
+    function cancelar() { if (abortRef.current) abortRef.current.abort(); }
+
+    async function copiar() {
+      try { await navigator.clipboard.writeText(guion); mostrarToast("Guion copiado ✓"); }
+      catch (e) { mostrarToast("No se pudo copiar"); }
+    }
+
+    function descargar() {
+      const blob = new Blob([guion], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      const slug = (tema.trim() || "guion").toLowerCase().replace(/[^a-z0-9áéíóúñ ]/gi, "").replace(/\s+/g, "-").slice(0, 50);
+      a.href = url; a.download = `guion-${slug || "video"}.txt`;
+      document.body.appendChild(a); a.click(); a.remove();
+      URL.revokeObjectURL(url);
+      mostrarToast("Descargando .txt ✓");
+    }
+
+    const conteo = useMemo(() => contarPalabras(guion), [guion]);
+    const desvio = palabras ? Math.round((conteo - palabras) / palabras * 100) : 0;
+
+    return (
+      <div className="wrap">
+        <header className="brand">
+          <div className="eyebrow">El Espejo Bíblico</div>
+          <h1>Generador de <span>Guiones</span></h1>
+          <p className="sub">Guiones optimizados para retención en canales faceless de YouTube. Configura, genera y narra.</p>
+          <div className="rule"></div>
+        </header>
+
+        <div className="grid">
+          {/* ---------------- Controles ---------------- */}
+          <div className="card">
+            <h2><span className="dot"></span>Configuración</h2>
+
+            <div className="field">
+              <label className="lbl">Tema del video</label>
+              <input type="text" value={tema} onChange={e => setTema(e.target.value)}
+                placeholder="Ej: El verdadero significado del nombre de Dios" />
+            </div>
+
+            <div className="field">
+              <label className="lbl">Nicho</label>
+              <select value={nicho} onChange={e => setNicho(e.target.value)}>
+                {NICHOS.map(n => <option key={n} value={n}>{n}</option>)}
+              </select>
+            </div>
+
+            <div className="field">
+              <label className="lbl">Cantidad de palabras</label>
+              <div className="row">
+                <input type="range" min="300" max="4000" step="50" value={palabras}
+                  style={{ "--fill": ((palabras - 300) / (4000 - 300) * 100) + "%" }}
+                  onChange={e => setPalabras(Number(e.target.value))} />
+                <input type="number" min="300" max="4000" step="50" value={palabras}
+                  onChange={e => {
+                    let v = Number(e.target.value) || 300;
+                    v = Math.max(300, Math.min(4000, v));
+                    setPalabras(v);
+                  }} />
+              </div>
+              <div className="hint">≈ {Math.round(palabras / 150)}–{Math.round(palabras / 130)} min de narración. El guion respeta el conteo (±5%).</div>
+            </div>
+
+            <div className="field">
+              <label className="lbl">Enfoque</label>
+              <input type="range" min="0" max="100" step="1" value={enfoque}
+                style={{ "--fill": enfoque + "%" }}
+                onChange={e => setEnfoque(Number(e.target.value))} />
+              <div className="enfoque-labels"><span>100% Informativo</span><span>100% Storytelling</span></div>
+              <div className="enfoque-val">{enfoqueTxt}</div>
+            </div>
+
+            <div className="field">
+              <label className="lbl">Tono</label>
+              <select value={tono} onChange={e => setTono(e.target.value)}>
+                {TONOS.map(t => <option key={t} value={t}>{t}</option>)}
+              </select>
+            </div>
+
+            <div className="apikey-box">
+              <label className="lbl">API Key de Anthropic</label>
+              <input type="password" value={apiKey} onChange={e => setApiKey(e.target.value)}
+                placeholder="sk-ant-..." autoComplete="off" />
+              <label className="check">
+                <input type="checkbox" checked={recordar} onChange={e => setRecordar(e.target.checked)} />
+                Recordar mi API key en este navegador
+              </label>
+              <div className="hint">Tu clave se usa solo para llamar a la API de Claude desde tu navegador. Consíguela en console.anthropic.com.</div>
+            </div>
+
+            {!cargando ? (
+              <button className="btn" onClick={generar} disabled={!puedeGenerar}>
+                ✦ Generar guion
+              </button>
+            ) : (
+              <button className="btn" onClick={cancelar} style={{ background: "linear-gradient(180deg,#e08b7a,#c7503a)", color: "#fff" }}>
+                Detener generación
+              </button>
+            )}
+          </div>
+
+          {/* ---------------- Resultado ---------------- */}
+          <div className="result-card">
+            <div className="result-head">
+              <span className="title">Tu guion</span>
+              <div className="actions">
+                <button className="mini" onClick={copiar} disabled={!guion || cargando}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="9" y="9" width="13" height="13" rx="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" /></svg>
+                  Copiar
+                </button>
+                <button className="mini" onClick={descargar} disabled={!guion || cargando}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
+                  .txt
+                </button>
+              </div>
+            </div>
+
+            <div className="script-shell" style={{ flex: 1, display: "flex", overflow: "hidden" }}>
+              {error ? (
+                <div className="script center" ref={scrollRef} style={{ width: "100%" }}>
+                  <div className="ph-icon">⚠️</div>
+                  <div className="err" style={{ maxWidth: "420px" }}>{error}</div>
+                  <button className="mini retry" onClick={generar}>Reintentar</button>
+                </div>
+              ) : cargando && !guion ? (
+                <div className="script center" style={{ width: "100%" }}>
+                  <div className="spinner"></div>
+                  <div>Escribiendo tu guion…</div>
+                  <div style={{ fontSize: "13px", marginTop: "6px", opacity: .7 }}>Esto puede tardar según la longitud.</div>
+                </div>
+              ) : guion ? (
+                <div className="script" ref={scrollRef} style={{ width: "100%" }}>{guion}</div>
+              ) : (
+                <div className="script placeholder" style={{ width: "100%" }}>
+                  <div className="ph-icon">✎</div>
+                  <div>Configura los parámetros a la izquierda y pulsa <b style={{ color: "var(--dorado)" }}>Generar guion</b>.</div>
+                  <div style={{ fontSize: "13px", marginTop: "8px", opacity: .7 }}>Aquí aparecerá el texto limpio, listo para narrar.</div>
+                </div>
+              )}
+            </div>
+
+            {guion && !error && (
+              <div className="counter">
+                <span>{conteo} palabras</span>
+                <span>Objetivo: {palabras} ({desvio > 0 ? "+" : ""}{desvio}%)</span>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <footer className="foot">
+          Modelo: <code>{MODELO}</code> · Las llamadas se hacen directamente desde tu navegador a la API de Anthropic.
+        </footer>
+
+        <div className={"toast" + (toast ? " show" : "")}>{toast}</div>
+      </div>
+    );
+}
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js')
+        .then(() => console.log('SW registrado'))
+        .catch((err) => console.log('SW error:', err));
+    }
+  </script>
+</body>
+
+</html>
