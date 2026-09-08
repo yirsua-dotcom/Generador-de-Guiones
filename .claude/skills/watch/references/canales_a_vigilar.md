@@ -53,8 +53,11 @@ No resumir el canal. Extraer solo esto:
 
 ## Canales fijados
 
-*(Vacío. Yair: añade aquí los canales concretos que quieres vigilar de forma estable — nombre y URL — y el módulo 2 los revisará siempre además de barrer por categoría.)*
+El módulo 2 revisa siempre estos, además de barrer por categoría. Yair puede añadir o quitar filas cuando quiera.
 
 | Canal | URL | Categoría | Por qué lo vigilo |
 |---|---|---|---|
-| | | | |
+| Sabiduría Judía | https://www.youtube.com/@sabiduriajudiaoficial | 2 — Judaísmo y Torá en español | Competencia directa por nombre y por keyword. Disputa las mismas búsquedas de "sabiduría judía" que sostienen el pilar Sabiduría Judía Aplicada. |
+| Mente Judía | https://www.youtube.com/channel/UCZii2rDO6GTysueyJCbA38A | 1 — Psicología bíblica en español | El nombre apunta al mismo cruce mente + judaísmo que define el canal. Es el competidor con mayor solapamiento potencial de posicionamiento. |
+
+Ambos entraron en el radar del 8 sep 2026 por búsqueda de categoría; en ese momento solo se verificó que existen y cómo se llaman. **Sin verificar todavía:** ritmo de publicación, formato dominante, tamaño y qué les está funcionando. Confírmalo la primera vez que los revises con links o capturas que aporte Yair, y anota aquí lo que salga.
