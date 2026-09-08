@@ -59,14 +59,18 @@ Propón entre 3 y 5 ideas, ordenadas por prioridad, no una lista larga sin jerar
 
 Objetivo: encontrar **el hueco**, no copiar lo que ya existe.
 
-Revisa los canales y frentes listados en `references/canales_a_vigilar.md`. Para cada uno mira qué publicaron en las últimas ~2 semanas y qué les está funcionando.
+Revisa los canales y frentes listados en `references/canales_a_vigilar.md`.
 
-Lo que importa observar:
+**Qué alcanza este módulo, y qué no.** La búsqueda web ve qué canales existen y qué títulos rankean para una consulta. **No ve vistas, ni retención, ni fechas de publicación, ni el feed reciente de un canal.** No los estimes ni los deduzcas del ranking de búsqueda: un título que aparece primero no es un video que esté funcionando. Declara la limitación en el informe la primera vez que corras el módulo en una conversación.
 
-- **Ganchos y títulos** — la fórmula concreta que usan en los primeros segundos y en el título. Esto es lo más transferible.
-- **Formato** — Short vs largo, duración real, si usan puente Short→Largo.
-- **Temas saturados** — qué está haciendo todo el mundo esta semana. Saturado no significa prohibido: significa que solo entras si tienes un ángulo distinto.
+Con esa restricción, lo que **sí** puedes extraer y es genuinamente útil:
+
+- **Fórmulas de título y gancho** — cómo formulan la promesa quienes ya rankean para tus keywords. Esto es lo más transferible de todo el módulo y no necesita métricas.
+- **Encuadre dominante** — desde qué marco se está tratando un tema en español (devocional, polémico, académico, narrativo). Detectar que una keyword está capturada por un encuadre concreto vale más que cualquier número, porque señala el hueco directamente.
+- **Densidad de oferta** — cuántos canales cubren un tema y con qué nombres. Muchos canales intercambiables sobre lo mismo es señal de saturación de tema y de vacío de ángulo.
 - **Huecos** — qué emoción, personaje o texto nadie está tocando y encaja con los pilares del canal. Aquí está el valor real del módulo.
+
+**Para lo que sí requiere métricas** — qué publicó un competidor estas dos semanas, qué video se le disparó, su ritmo real de publicación — pídeselo a Yair: links concretos, capturas de la pestaña de vídeos de un canal, o lo que haya visto él. Pedirlo es correcto; inventarlo no.
 
 **Cómo entregarlo:** 3-4 observaciones concretas, cada una con su implicación para Yair. "El canal X publicó sobre Yosef" no sirve. "Tres canales cubrieron Yosef como historia de éxito y ninguno como historia de rechazo fraterno — ese es tu ángulo, y es exactamente tu pilar" sí sirve.
 
@@ -106,7 +110,15 @@ Y responde a estas preguntas, en este orden:
 
 Da a Yair el horizonte de producción, con margen suficiente para grabar a tiempo.
 
-Verifica siempre con búsqueda web — el calendario es lunisolar y cambia cada año. Fuentes fiables: hebcal.com, chabad.org. Los datos guardados en `espejo-biblico-produccion/references/calendario_y_fechas_judias.md` solo sirven si la fecha de hoy cae dentro del rango ya verificado ahí; fuera de ese rango, vuelve a verificar.
+Verifica siempre con búsqueda web — el calendario es lunisolar y cambia cada año. Los datos guardados en `espejo-biblico-produccion/references/calendario_y_fechas_judias.md` solo sirven si la fecha de hoy cae dentro del rango ya verificado ahí; fuera de ese rango, vuelve a verificar.
+
+**Fuentes, en orden de preferencia:**
+
+1. **chabad.org / es.chabad.org** — fuente primaria. Su vista de calendario por día (`chabad.org/calendar/view/day.asp?tdate=M/D/YYYY`) da fecha hebrea, festividad y lectura de un tirón.
+2. **Búsqueda web abierta**, cruzando al menos dos resultados independientes antes de dar una fecha por buena.
+3. **hebcal.com** — excelente cuando responde, pero **puede estar bloqueado por el proxy de red** según el entorno donde corra la sesión. Si devuelve un error de egreso, no insistas ni lo reportes como fallo: pasa a las fuentes de arriba.
+
+**Nunca des una fecha del calendario judío sin verificarla en esta sesión.** Si las tres vías fallan, dilo abiertamente y entrega el resto del radar sin el módulo — un calendario inventado hace que Yair produzca para la fecha equivocada.
 
 Entrega:
 
