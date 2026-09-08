@@ -59,5 +59,18 @@ El módulo 2 revisa siempre estos, además de barrer por categoría. Yair puede 
 |---|---|---|---|
 | Sabiduría Judía | https://www.youtube.com/@sabiduriajudiaoficial | 2 — Judaísmo y Torá en español | Competencia directa por nombre y por keyword. Disputa las mismas búsquedas de "sabiduría judía" que sostienen el pilar Sabiduría Judía Aplicada. |
 | Mente Judía | https://www.youtube.com/channel/UCZii2rDO6GTysueyJCbA38A | 1 — Psicología bíblica en español | El nombre apunta al mismo cruce mente + judaísmo que define el canal. Es el competidor con mayor solapamiento potencial de posicionamiento. |
+| Daniel Chapan | https://www.youtube.com/@DanielChapan | Por confirmar | **Aportado por Yair (8 sep 2026): es de su región.** La proximidad geográfica pesa más que la temática — comparte mercado, variedad de español y señales de audiencia con El Espejo Bíblico, así que YouTube los cruza en recomendados. |
+| Rabino Armoni | https://www.youtube.com/@RabinoArmoni | Por confirmar | **Aportado por Yair (8 sep 2026): es de su región.** Mismo caso: solapamiento de audiencia regional. El nombre sugiere autoridad rabínica de primera persona, un formato que El Espejo Bíblico no usa — conviene ver cómo lo aprovecha. |
 
-Ambos entraron en el radar del 8 sep 2026 por búsqueda de categoría; en ese momento solo se verificó que existen y cómo se llaman. **Sin verificar todavía:** ritmo de publicación, formato dominante, tamaño y qué les está funcionando. Confírmalo la primera vez que los revises con links o capturas que aporte Yair, y anota aquí lo que salga.
+Los dos primeros entraron por búsqueda de categoría el 8 sep 2026; los dos últimos los aportó Yair. En todos los casos solo está verificado que existen y cómo se llaman. **Sin verificar:** ritmo de publicación, formato dominante, tamaño, tono y qué les está funcionando. En Daniel Chapan y Rabino Armoni tampoco está verificada la categoría — asígnala la primera vez que se revisen de verdad.
+
+## Aviso de acceso: YouTube puede estar bloqueado
+
+En la ejecución del 8 sep 2026, **youtube.com y youtu.be estaban bloqueados por el proxy de red** del entorno. Ni la ficha de un canal ni la de un vídeo se pudieron abrir, y buscar por ID de vídeo tampoco resolvió a qué canal pertenecía.
+
+Cuando eso ocurra:
+
+- **No insistas** con variantes de URL ni lo reportes como fallo de la tarea. Dilo una vez y sigue.
+- Lo que **sí** funciona es la búsqueda web por nombre de canal o por tema, que devuelve títulos y descripciones aunque no deje entrar al sitio.
+- Para lo que exige ver el canal — qué subió estas dos semanas, vistas, ritmo — **pídeselo a Yair**: capturas de la pestaña de vídeos, o los títulos y fechas copiados. Es la misma regla que ya rige el módulo: pedirlo es correcto, deducirlo no.
+- Si Yair pasa el link de un **vídeo** en vez del de un canal, avísale de que hace falta la URL del canal (`youtube.com/@handle`), porque sin acceso no se puede resolver de un ID de vídeo al canal que lo publicó.
